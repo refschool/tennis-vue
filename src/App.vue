@@ -1,6 +1,6 @@
 <script setup>
 import { ref} from 'vue'
-
+import Liste from './views/Liste.vue'
 const currentPage = ref('liste')
 
 const clubName = "Tennis Club Vue"
@@ -21,7 +21,7 @@ const today = new Date().toISOString().split('T')[0]
   </div>
 
     <div v-if="currentPage === 'liste'">
-    Page List
+    <Liste />
   </div>
 </template>
 
