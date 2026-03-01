@@ -1,10 +1,10 @@
 <script setup>
+import { ref} from 'vue'
+
+const currentPage = ref('liste')
 
 const clubName = "Tennis Club Vue"
 const today = new Date().toISOString().split('T')[0]
-
-// State global simple (à améliorer plus tard)
-const reservations = ref([])
 
 // TODO : passer reservations aux views via props si nécessaire
 </script>
@@ -14,6 +14,14 @@ const reservations = ref([])
     <h1>{{ clubName }}</h1>
     <p>Date du jour : {{ today }}</p>
 
+  </div>
+
+  <div v-if="currentPage === 'home'">
+    Page Home
+  </div>
+
+    <div v-if="currentPage === 'liste'">
+    Page List
   </div>
 </template>
 
