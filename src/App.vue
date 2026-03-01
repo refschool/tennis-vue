@@ -19,7 +19,7 @@ const today = new Date().toISOString().split('T')[0]
       <router-link to="/reservations">Réservations</router-link> |
       <router-link to="/contact">Contact</router-link>
     </nav>
-    <router-view />
+
     <hr />
     <router-view />
   </div>
