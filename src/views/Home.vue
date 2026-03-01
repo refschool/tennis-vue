@@ -2,7 +2,7 @@
 import ReservationForm from '../components/ReservationForm.vue'
 
 defineProps(['reservations'])
-// defineEmits(['add-reservation'])
+defineEmits(['add-reservation'])
 </script>
 
 <template>

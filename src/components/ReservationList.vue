@@ -1,5 +1,5 @@
 <script setup>
-import ReservationList from '../components/ReservationList.vue'
+import ReservationItem from './ReservationItem.vue'
 
 defineProps(['reservations'])
 defineEmits(['delete-reservation'])
@@ -7,10 +7,10 @@ defineEmits(['delete-reservation'])
 
 <template>
   <div>
-    <h2>Liste des réservations</h2>
-
-    <ReservationList
-      :reservations="reservations"
+    <ReservationItem
+      v-for="r in reservations"
+      :key="r.id"
+      :reservation="r"
       @delete-reservation="$emit('delete-reservation', $event)"
     />
   </div>

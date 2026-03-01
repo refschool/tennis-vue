@@ -1,41 +1,44 @@
 <script setup>
-import {ref} from 'vue'
+import { ref, watch } from 'vue'
 
 const clubName = "Tennis Club Vue"
 const today = new Date().toISOString().split('T')[0]
 
-// State global simple (à améliorer plus tard)
-//const reservations = ref([])
+// Chargement localStorage
+const saved = localStorage.getItem('reservations')
+const reservations = ref(saved ? JSON.parse(saved) : [])
 
-// TODO : passer reservations aux views via props si nécessaire
+// Persistance automatique
+watch(reservations, (newVal) => {
+  localStorage.setItem('reservations', JSON.stringify(newVal))
+}, { deep: true })
+
+function addReservation(reservation) {
+  reservations.value.push(reservation)
+}
+
+function deleteReservation(id) {
+  reservations.value = reservations.value.filter(r => r.id !== id)
+}
 </script>
 
 <template>
-  <div>
+  <div style="max-width:800px;margin:auto">
     <h1>{{ clubName }}</h1>
     <p>Date du jour : {{ today }}</p>
+
     <nav>
       <router-link to="/">Réserver</router-link> |
       <router-link to="/reservations">Réservations</router-link> |
-      <router-link to="/contact">Contact</router-link>
+      <router-link to="/stats">Statistiques</router-link>
     </nav>
 
     <hr />
-    <router-view />
+
+    <router-view
+      :reservations="reservations"
+      @add-reservation="addReservation"
+      @delete-reservation="deleteReservation"
+    />
   </div>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
