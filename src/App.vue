@@ -1,17 +1,20 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+
+const clubName = "Tennis Club Vue"
+const today = new Date().toISOString().split('T')[0]
+
+// State global simple (à améliorer plus tard)
+const reservations = ref([])
+
+// TODO : passer reservations aux views via props si nécessaire
 </script>
 
 <template>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h1>{{ clubName }}</h1>
+    <p>Date du jour : {{ today }}</p>
+
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
